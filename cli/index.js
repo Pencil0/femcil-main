@@ -37,11 +37,70 @@ overwriteSettings(currentHandle.settings);
 require("./log-handler")(currentHandle);
 const logger = currentHandle.logger;
 
-// --- START OF MODIFIED SECTION ---
-// This line MUST run unconditionally, as it starts the actual game server
+// --- CRITICAL ORDER CHANGE STARTS HERE ---
+
+// 1. Register Gamemodes and Protocols FIRST
+DefaultCommands(currentHandle.commands, currentHandle.chatCommands);
+currentHandle.protocols.register(...DefaultProtocols);
+currentHandle.gamemodes.register(...DefaultGamemodes); // This must happen BEFORE starting the handle!
+
+// 2. Register CLI commands (these also depend on currentHandle setup)
+currentHandle.commands.register(
+    genCommand({
+        name: "start",
+        args: "",
+        desc: "start the handle",
+        exec: (handle, context, args) => {
+            if (!handle.start()) handle.logger.print("handle already running");
+        }
+    }),
+    genCommand({
+        name: "stop",
+        args: "",
+        desc: "stop the handle",
+        exec: (handle, context, args) => {
+            if (!handle.stop()) handle.logger.print("handle not started");
+        }
+    }),
+    genCommand({
+        name: "exit",
+        args: "",
+        desc: "stop the handle and close the command stream",
+        exec: (handle, context, args) => {
+            handle.stop();
+            // Only close commandStream if it was initialized (i.e., in interactive mode)
+            if (process.stdin.isTTY) {
+                commandStream.close();
+            }
+            commandStreamClosing = true;
+        }
+    }),
+    genCommand({
+        name: "reload",
+        args: "",
+        desc: "reload the settings from local settings.json",
+        exec: (handle, context, args) => {
+            handle.setSettings(readSettings());
+            logger.print("done");
+        }
+    }),
+    genCommand({
+        name: "save",
+        args: "",
+        desc: "save the current settings to settings.json",
+        exec: (handle, context, args) => {
+            overwriteSettings(handle.settings);
+            logger.print("done");
+        }
+    }),
+);
+
+// 3. Now, start the server handle (after everything it needs is registered)
 currentHandle.start();
 
-// Now, conditionally set up the interactive command stream
+// --- END OF CRITICAL ORDER CHANGE ---
+
+// Conditional setup for interactive command stream (remains the same as last time)
 if (process.stdin.isTTY) { // Check if running in an interactive terminal
     logger.inform("Detected interactive terminal. Initializing CLI.");
 
@@ -62,59 +121,6 @@ if (process.stdin.isTTY) { // Check if running in an interactive terminal
         process.exitCode = 0;
     });
 
-    // Register interactive commands (these were previously outside,
-    // but they primarily interact via the command stream, so moving them inside
-    // makes sense for a cleaner separation)
-    DefaultCommands(currentHandle.commands, currentHandle.chatCommands);
-    currentHandle.protocols.register(...DefaultProtocols);
-    currentHandle.gamemodes.register(...DefaultGamemodes);
-    currentHandle.commands.register(
-        genCommand({
-            name: "start",
-            args: "",
-            desc: "start the handle",
-            exec: (handle, context, args) => {
-                if (!handle.start()) handle.logger.print("handle already running");
-            }
-        }),
-        genCommand({
-            name: "stop",
-            args: "",
-            desc: "stop the handle",
-            exec: (handle, context, args) => {
-                if (!handle.stop()) handle.logger.print("handle not started");
-            }
-        }),
-        genCommand({
-            name: "exit",
-            args: "",
-            desc: "stop the handle and close the command stream",
-            exec: (handle, context, args) => {
-                handle.stop();
-                commandStream.close();
-                commandStreamClosing = true;
-            }
-        }),
-        genCommand({
-            name: "reload",
-            args: "",
-            desc: "reload the settings from local settings.json",
-            exec: (handle, context, args) => {
-                handle.setSettings(readSettings());
-                logger.print("done");
-            }
-        }),
-        genCommand({
-            name: "save",
-            args: "",
-            desc: "save the current settings to settings.json",
-            exec: (handle, context, args) => {
-                overwriteSettings(handle.settings);
-                logger.print("done");
-            }
-        }),
-    );
-
     function ask() {
         if (commandStreamClosing) return;
         commandStream.question("@ ", (input) => {
@@ -132,8 +138,5 @@ if (process.stdin.isTTY) { // Check if running in an interactive terminal
     }, 1000);
 
 } else {
-    // If not in an interactive terminal (e.g., on Render), just log that we are skipping CLI
     logger.inform("Running in non-interactive mode. Skipping CLI prompts and commands.");
-    // In this mode, only currentHandle.start() will execute, which is what we want for Render.
 }
-// --- END OF MODIFIED SECTION ---
