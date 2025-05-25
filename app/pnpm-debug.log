@@ -1,0 +1,122 @@
+---
+  0 debug pnpm:scope: 
+    selected: 1
+    workspacePrefix: null
+  1 info pnpm: 
+    message: "A store server is running. All store manipulations are delegated to it."
+    prefix: "/app"
+  2 debug pnpm:package-json: 
+    initial: 
+      name: "ogarii"
+      version: "1.3.2"
+      description: "FOSS implementation of a private Agar.io gameserver"
+      license: "Apache-2.0"
+      scripts: 
+        start: "node cli/index.js"
+      dependencies: 
+        ws: "^8.18.2"
+        node: "^22.16.0"
+      engine: 
+        node: "16.x"
+      readme: "[![shield to Agar.io Private Servers guild](https://discordapp.com/api/guilds/407210435721560065/embed.png?style=shield)](https://discord.gg/XcKgShT)\n\n# OgarII\n\nYour friendly agar.io private server recreation.\n\n- It supports all current agar.io protocol versions.\n\n- It supports handling multiple worlds, all within one instance. Be wary that you can still use up the one CPU core node.js is running on.\n\n- It has a minimal memory footprint, and strictly uses uWebSockets for networking.\n\n- The code uses JSDoc to specify types. Understanding what the code does is down to your understanding of English.\n\n## Notes\n\n- Ask all your questions over on the [Agar.io Private Servers](https://discord.gg/66X2ESb) Discord guild.\n\n- Before connecting from agar.io you will need to do `core.disableIntegrityChecks(true)` in the console.\n\n## Running\n\n1. Make sure you have node.js version 8 or greater.\n\n2. Make sure you have a C++11 compliant compiler for building uWebSockets.\n    - If you're on Windows, `npm install -g windows-build-tools`.\n    - If you're on GNU/Linux, use your package manager to install a supported C++ compiler such as GCC.\n\n3. Clone / [download](https://github.com/Luka967/OgarII/archive/master.zip) the repo.\n\n4. `npm install` in `/`.\n\n5. `cd ./cli/`\n\n6. `node index.js`\n\n## Configuring\n\n- After your first run, OgarII will drop two files in `cli/` / working directory: `log-settings.json` and `settings.json`.\n\n- To change how OgarII runs, modify `cli/settings.json`.\n\n- To change what gets logged, modify `cli/log-settings.json`.\n\n## Expanding\n\n- To create your own commands, check out `src/commands/CommandList.js` on the command API. To add it to the CLI use `ServerHandle.commands.register`, and for chat commands use `ServerHandle.chatCommands.register`.\n\n- To create your own gamemodes, inherit `src/Gamemode.js`'s `Gamemode` abstract class, modify event handling to your wish, then add it with `ServerHandle.gamemodes.register` before the handle starts.\n\n- The `ServerHandle` class is standalone, which means that you can completely ditch the `cli/` folder, `require(\"./src/ServerHandle.js\")` and do whatever you want with it. OgarII is also available as an npm package for this exact purpose.\n"
+      readmeFilename: "README.md"
+      gitHead: "acf7ac3006d64341a7c3953819dc550bf6585dcf"
+      _id: "ogarii@1.3.2"
+    prefix: "/app"
+  3 debug pnpm:stage: 
+    prefix: "/app"
+    stage: "resolution_started"
+  4 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/ws/8.18.2"
+    requester: "/app"
+    status: "resolved"
+  5 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/ws/8.18.2"
+    requester: "/app"
+    status: "found_in_store"
+  6 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/node/22.16.0"
+    requester: "/app"
+    status: "resolved"
+  7 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/node/22.16.0"
+    requester: "/app"
+    status: "fetched"
+  8 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/node-bin-setup/1.1.4"
+    requester: "/app"
+    status: "resolved"
+  9 debug pnpm:stage: 
+    prefix: "/app"
+    stage: "resolution_done"
+  10 debug pnpm:package-json: 
+    prefix: "/app"
+    updated: 
+      name: "ogarii"
+      version: "1.3.2"
+      description: "FOSS implementation of a private Agar.io gameserver"
+      license: "Apache-2.0"
+      scripts: 
+        start: "node cli/index.js"
+      dependencies: 
+        ws: "^8.18.2"
+        node: "^22.16.0"
+      engine: 
+        node: "16.x"
+      readme: "[![shield to Agar.io Private Servers guild](https://discordapp.com/api/guilds/407210435721560065/embed.png?style=shield)](https://discord.gg/XcKgShT)\n\n# OgarII\n\nYour friendly agar.io private server recreation.\n\n- It supports all current agar.io protocol versions.\n\n- It supports handling multiple worlds, all within one instance. Be wary that you can still use up the one CPU core node.js is running on.\n\n- It has a minimal memory footprint, and strictly uses uWebSockets for networking.\n\n- The code uses JSDoc to specify types. Understanding what the code does is down to your understanding of English.\n\n## Notes\n\n- Ask all your questions over on the [Agar.io Private Servers](https://discord.gg/66X2ESb) Discord guild.\n\n- Before connecting from agar.io you will need to do `core.disableIntegrityChecks(true)` in the console.\n\n## Running\n\n1. Make sure you have node.js version 8 or greater.\n\n2. Make sure you have a C++11 compliant compiler for building uWebSockets.\n    - If you're on Windows, `npm install -g windows-build-tools`.\n    - If you're on GNU/Linux, use your package manager to install a supported C++ compiler such as GCC.\n\n3. Clone / [download](https://github.com/Luka967/OgarII/archive/master.zip) the repo.\n\n4. `npm install` in `/`.\n\n5. `cd ./cli/`\n\n6. `node index.js`\n\n## Configuring\n\n- After your first run, OgarII will drop two files in `cli/` / working directory: `log-settings.json` and `settings.json`.\n\n- To change how OgarII runs, modify `cli/settings.json`.\n\n- To change what gets logged, modify `cli/log-settings.json`.\n\n## Expanding\n\n- To create your own commands, check out `src/commands/CommandList.js` on the command API. To add it to the CLI use `ServerHandle.commands.register`, and for chat commands use `ServerHandle.chatCommands.register`.\n\n- To create your own gamemodes, inherit `src/Gamemode.js`'s `Gamemode` abstract class, modify event handling to your wish, then add it with `ServerHandle.gamemodes.register` before the handle starts.\n\n- The `ServerHandle` class is standalone, which means that you can completely ditch the `cli/` folder, `require(\"./src/ServerHandle.js\")` and do whatever you want with it. OgarII is also available as an npm package for this exact purpose.\n"
+      readmeFilename: "README.md"
+      gitHead: "acf7ac3006d64341a7c3953819dc550bf6585dcf"
+      _id: "ogarii@1.3.2"
+  11 debug pnpm:progress: 
+    packageId: "registry.npmjs.org/node-bin-setup/1.1.4"
+    requester: "/app"
+    status: "found_in_store"
+  12 warn pnpm: 
+    message: "ws@8.18.2 requires a peer of bufferutil@^4.0.1 but none was installed."
+    prefix: "/app"
+  13 warn pnpm: 
+    message: "ws@8.18.2 requires a peer of utf-8-validate@>=5.0.2 but none was installed."
+    prefix: "/app"
+  14 debug pnpm:stats: 
+    prefix: "/app"
+    removed: 0
+  15 debug pnpm:stage: 
+    prefix: "/app"
+    stage: "importing_started"
+  16 debug pnpm:stats: 
+    added: 2
+    prefix: "/app"
+  17 debug pnpm:link: 
+    target: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/.registry.npmjs.org/node-bin-setup/1.1.4/node_modules/node-bin-setup"
+    link: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/.registry.npmjs.org/node/22.16.0/node_modules/node-bin-setup"
+  18 debug pnpm:stage: 
+    prefix: "/app"
+    stage: "importing_done"
+  19 debug pnpm:link: 
+    target: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/.registry.npmjs.org/ws/8.18.2/node_modules/ws"
+    link: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/ws"
+  20 debug pnpm:link: 
+    target: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/.registry.npmjs.org/node/22.16.0/node_modules/node"
+    link: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/node"
+  21 debug pnpm:root: 
+    added: 
+      dependencyType: "prod"
+      id: "registry.npmjs.org/node/22.16.0"
+      name: "node"
+      realName: "node"
+      version: "22.16.0"
+    prefix: "/app"
+  22 debug pnpm:link: 
+    target: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/.registry.npmjs.org/node-bin-setup/1.1.4/node_modules/node-bin-setup"
+    link: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/node-bin-setup"
+  23 error pnpm: 
+    message: 
+      errno: -2
+      code: "ENOENT"
+      syscall: "chmod"
+      path: "/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/node/bin/node"
+    err: 
+      name: "Error"
+      message: "ENOENT: no such file or directory, chmod '/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/node/bin/node'"
+      code: "ENOENT"
+      stack: "Error: ENOENT: no such file or directory, chmod '/rbd/pnpm-volume/8f1ff2d0-aa9b-415e-83d0-a3ecb648999a/node_modules/node/bin/node'"

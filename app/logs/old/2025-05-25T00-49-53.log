@@ -1,0 +1,12 @@
+2024-10-17 02:41:35.162 [INFO] starting
+2024-10-17 02:41:35.170 [DEBUG] listener opening at 3000
+2024-10-17 02:41:35.177 [INFO] ticker begin
+2024-10-17 02:41:35.177 [INFO] OgarII 1.3.6
+2024-10-17 02:41:35.177 [INFO] gamemode: FFA
+2024-10-17 02:41:35.179 [INFO] listener open at 443
+2024-10-17 02:41:35.883 [ACCESS] REQUEST FROM 127.0.0.1, not secure, Origin: https://femcil-main.glitch.me
+2024-10-17 02:41:35.884 [DEBUG] client verification passed
+2024-10-17 02:41:35.885 [ACCESS] CONNECTION FROM 127.0.0.1
+2024-10-17 02:41:35.920 [DEBUG] connection from 127.0.0.1 has disconnected
+2024-10-17 02:41:35.941 [ACCESS] DISCONNECTION FROM 127.0.0.1 (1002 'WebSocket Protocol Error')
+2024-10-17 02:41:36.163 [DEBUG] command stream open
