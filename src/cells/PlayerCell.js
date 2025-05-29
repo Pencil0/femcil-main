@@ -57,7 +57,6 @@ class PlayerCell extends Cell {
         if (this.name !== this.owner.cellName)
             this.name = this.owner.cellName;
         if (this.skin !== this.owner.cellSkin)
-            this.logger.debug(this.skin + this.owner.cellSkin);
             this.skin = this.owner.cellSkin;
         if (this.color !== this.owner.cellColor)
             this.color = this.owner.cellColor;
